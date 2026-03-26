@@ -1141,19 +1141,65 @@ footer{
     <p class="sec-desc">Framing the world with an architect's precision. Click cells to upload photos or videos.</p>
   </div>
 
-  <div class="photo-grid">
-    <div class="pc c1"  onclick="openLb(this)"><div class="p-upload" id="pu1"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 1</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Architecture</span></div></div>
-    <div class="pc c2"  onclick="openLb(this)"><div class="p-upload" id="pu2"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 2</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Urban</span></div></div>
-    <div class="pc c3"  onclick="openLb(this)"><div class="p-upload" id="pu3"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 3</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Landscape</span></div></div>
-    <div class="pc c4"  onclick="openLb(this)"><div class="p-upload" id="pu4"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 4</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Detail</span></div></div>
-    <div class="pc c5"  onclick="openLb(this)"><div class="p-upload" id="pu5"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 5</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Portrait</span></div></div>
-    <div class="pc c6"  onclick="openLb(this)"><div class="p-upload" id="pu6"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 6</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Street</span></div></div>
-    <div class="pc c7"  onclick="openLb(this)"><div class="p-upload" id="pu7"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 7</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Texture</span></div></div>
-    <div class="pc c8"  onclick="openLb(this)"><div class="p-upload" id="pu8"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 8</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Nature</span></div></div>
-    <div class="pc c9"  onclick="openLb(this)"><div class="p-upload" id="pu9"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 9</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Abstract</span></div></div>
-    <div class="pc c10" onclick="openLb(this)"><div class="p-upload" id="pu10"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 10</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">City</span></div></div>
-    <div class="pc c11" onclick="openLb(this)"><div class="p-upload" id="pu11"><span class="pu2-ico">📷</span><span class="pu2-txt">Photo 11</span><input type="file" accept="image/*,video/*" onchange="setCell(this,event)"></div><div class="pc-ov"><span class="pc-cap">Architecture</span></div></div>
+<div class="photo-grid">
+
+  <div class="pc c1" onclick="openLightbox('images/photo1.jpg')">
+    <img src="Architecture.jpg">
+    <div class="pc-ov"><span class="pc-cap">Architecture</span></div>
   </div>
+
+  <div class="pc c2" onclick="openLightbox('images/photo2.jpg')">
+    <img src="Urban.jpg">
+    <div class="pc-ov"><span class="pc-cap">Urban</span></div>
+  </div>
+
+  <div class="pc c3" onclick="openLightbox('images/photo3.jpg')">
+    <img src="Landscape.jpg">
+    <div class="pc-ov"><span class="pc-cap">Landscape</span></div>
+  </div>
+   <div class="pc c4" onclick="openLightbox('images/photo4.jpg')">
+    <img src="Detail.jpg">
+    <div class="pc-ov"><span class="pc-cap">Detail</span></div>
+  </div>
+
+  <div class="pc c5" onclick="openLightbox('images/photo5.jpg')">
+    <img src="Potrait.jpg">
+    <div class="pc-ov"><span class="pc-cap">Portrait</span></div>
+  </div>
+
+  <div class="pc c6" onclick="openLightbox('images/photo6.jpg')">
+    <img src="Street.jpg">
+    <div class="pc-ov"><span class="pc-cap">Street</span></div>
+  </div>
+   <div class="pc c7" onclick="openLightbox('images/photo7.jpg')">
+    <img src="City.jpg">
+    <div class="pc-ov"><span class="pc-cap">City</span></div>
+  </div>
+
+  <div class="pc c8" onclick="openLightbox('images/photo8.jpg')">
+    <img src="Texture.jpg">
+    <div class="pc-ov"><span class="pc-cap">Texture</span></div>
+  </div>
+
+  <div class="pc c9" onclick="openLightbox('images/photo9.jpg')">
+    <img src="Nature.jpg">
+    <div class="pc-ov"><span class="pc-cap">Nature</span></div>
+  </div>
+<div class="pc c10" onclick="openLightbox('images/photo10.jpg')">
+    <img src="Abstract.jpg">
+    <div class="pc-ov"><span class="pc-cap">Abstract</span></div>
+  </div>
+   <div class="pc c11" onclick="openLightbox('images/photo11.jpg')">
+    <img src="Architecture.jpg">
+    <div class="pc-ov"><span class="pc-cap">Architecture</span></div>
+  </div>
+
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
 
   <p class="strip-head rv">Featured Series</p>
   <div class="strip" id="strip">
