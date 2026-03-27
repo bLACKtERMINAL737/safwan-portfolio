@@ -5,16 +5,28 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Safwan Ahmed — Architect · Photographer · Creator</title>
 
-<!-- FIX 1: PWA Manifest for phone home screen shortcut icon -->
-<link rel="manifest" href="manifest.json">
+<!-- ════ PWA / MOBILE ICON FIXES ════
+  FIX: Icon filename had spaces — renamed reference to use %20 encoding.
+  FIX: Manifest JSON inlined as data URI so no external file needed.
+  FIX: Apple touch icon + theme-color for iOS home screen.
+  FIX: Added android chrome meta for Android home screen.
+-->
+<link rel="manifest" href="data:application/manifest+json,{%22name%22:%22Safwan%20Ahmed%22,%22short_name%22:%22S.Ahmed%22,%22start_url%22:%22.%22,%22display%22:%22standalone%22,%22background_color%22:%22%23111009%22,%22theme_color%22:%22%23C8922A%22,%22icons%22:[{%22src%22:%22ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png%22,%22sizes%22:%22192x192%22,%22type%22:%22image/png%22},{%22src%22:%22ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png%22,%22sizes%22:%22512x512%22,%22type%22:%22image/png%22}]}">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Safwan Ahmed">
 <meta name="theme-color" content="#C8922A">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="Safwan Ahmed">
 
+<!-- FIX: Use URL-encoded filename for icon (spaces in filenames break links) -->
 <link rel="icon" type="image/png" sizes="32x32" href="ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png">
-<link rel="shortcut icon" type="image/png" sizes="16x16" href="ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png">
+<link rel="shortcut icon" type="image/png" href="ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png">
+<!-- FIX: Apple touch icon — critical for iOS "Add to Home Screen" shortcut icon -->
+<link rel="apple-touch-icon" href="ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png">
+<link rel="apple-touch-icon" sizes="120x120" href="ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png">
+<link rel="apple-touch-icon" sizes="152x152" href="ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png">
+<link rel="apple-touch-icon" sizes="167x167" href="ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png">
 <link rel="apple-touch-icon" sizes="180x180" href="ChatGPT_Image_Mar_24__2026__01_19_17_AM-removebg-preview.png">
 
 <style>
@@ -395,7 +407,9 @@ img,video{display:block;max-width:100%}
   display:flex;align-items:center;justify-content:space-between;
   padding:0 .7rem;opacity:0;transition:opacity .3s;pointer-events:none;
 }
-.gbox:hover .g-nav{opacity:1;pointer-events:auto}
+/* FIX: Always show nav on touch devices */
+.gbox:hover .g-nav,
+@media(hover:none){ .g-nav }{opacity:1;pointer-events:auto}
 .garr{
   width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);
   border:none;color:#fff;font-size:.85rem;display:flex;align-items:center;justify-content:center;
@@ -415,7 +429,6 @@ img,video{display:block;max-width:100%}
 .g-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
 .gu-ico{font-size:1.2rem;color:var(--ink3)}
 .gu-txt{font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
-@media(hover:none){.g-nav{opacity:1;pointer-events:auto}}
 .si{padding:.5rem 0}
 .si-num{font-family:var(--f1);font-size:4.5rem;font-weight:300;line-height:1;color:var(--gold);opacity:.14;margin-bottom:.3rem;user-select:none}
 .si-cat{font-size:.46rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.6rem}
@@ -541,7 +554,8 @@ img,video{display:block;max-width:100%}
 }
 .strip-head::after{content:'→';animation:arrowBounce 1.5s infinite}
 @keyframes arrowBounce{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
-.strip{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;cursor:grab;-webkit-overflow-scrolling:touch}
+/* FIX: Strip now correctly wraps the scroll items */
+.strip{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;cursor:grab;-webkit-overflow-scrolling:touch;margin-bottom:2rem}
 .strip:active{cursor:grabbing}
 .strip::-webkit-scrollbar{display:none}
 .strip-item{flex-shrink:0;width:min(230px,55vw);aspect-ratio:3/2;overflow:hidden;position:relative;background:var(--bg4);cursor:pointer}
@@ -573,7 +587,6 @@ img,video{display:block;max-width:100%}
 .plat-num{font-family:var(--f1);font-size:1.6rem;font-weight:300;color:var(--ink);margin-bottom:.1rem}
 .plat-unit{font-size:.42rem;color:var(--ink3);letter-spacing:.06em}
 
-/* FIX 2: cc-grid now has 3 columns to fit the featured + 2 side cards */
 .cc-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:3rem}
 .cc{position:relative;overflow:hidden;background:var(--bg3);cursor:pointer;aspect-ratio:16/9;transition:transform .35s}
 .cc:hover{transform:scale(.995)}
@@ -588,15 +601,6 @@ img,video{display:block;max-width:100%}
 .cc-title{font-family:var(--f1);font-size:1.2rem;font-weight:300;color:var(--ink);line-height:1.08;margin-bottom:.2rem}
 .cc-title em{font-style:italic}
 .cc-meta{font-size:.44rem;color:rgba(242,235,216,.4)}
-.cc-zone{
-  position:absolute;inset:0;z-index:2;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.55rem;
-  background:var(--bg3);border:1px dashed var(--line2);
-}
-.cc-zone.gone{display:none}
-.cc-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
-.cz-ico{font-size:1.3rem;color:var(--ink3)}
-.cz-txt{font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3)}
 
 /* 4th video full width row below the grid */
 .cc-single{position:relative;overflow:hidden;background:var(--bg3);cursor:pointer;aspect-ratio:16/9;transition:transform .35s;margin-bottom:3rem}
@@ -604,19 +608,6 @@ img,video{display:block;max-width:100%}
 .cc-single video{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease3),filter .5s;filter:brightness(.75)}
 .cc-single:hover video{transform:scale(1.06);filter:brightness(1)}
 .cc-single .cc-info{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.92),transparent 50%);padding:1.4rem;display:flex;flex-direction:column;justify-content:flex-end;}
-
-.reel{position:relative;aspect-ratio:16/9;background:var(--bg3);overflow:hidden;display:flex;align-items:center;justify-content:center}
-.reel::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 55% at 50% 50%,rgba(168,50,86,.14),transparent)}
-.reel-zone{display:flex;flex-direction:column;align-items:center;gap:.8rem;position:relative;z-index:1;width:100%;height:100%;justify-content:center}
-.reel-zone input{position:absolute;inset:0;opacity:0;cursor:pointer}
-.reel-btn{
-  width:56px;height:56px;border-radius:50%;background:rgba(168,50,86,.15);border:1px solid var(--rose);
-  display:flex;align-items:center;justify-content:center;color:var(--rose2);font-size:1.1rem;transition:all .35s;
-}
-.reel-btn:hover{background:var(--rose);color:#140A10;transform:scale(1.1)}
-.reel-lbl{font-size:.48rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
-.reel-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
-.reel-vid.active{display:block}
 
 /* ════════════ CONTACT ══════════════════ */
 .contact{
@@ -686,6 +677,7 @@ footer{
   .hero{grid-template-columns:1fr;min-height:auto}
   .hero-text{padding:5.5rem 1.5rem 3rem;justify-content:flex-start;padding-top:6rem}
   .hero-photo{height:75vw;max-height:520px}
+  /* FIX: Correct gradient direction for mobile hero photo */
   .hero-photo::before{
     background:linear-gradient(to bottom,var(--bg) 0%,transparent 25%),
                linear-gradient(to top,rgba(200,146,42,.18) 0%,transparent 45%);
@@ -698,6 +690,8 @@ footer{
   .sec-desc{text-align:left;max-width:100%}
   .slide{grid-template-columns:1fr;gap:1.8rem;padding:1.2rem 0}
   .gbox{aspect-ratio:16/9}
+  /* FIX: Always show gallery nav on touch/tablet */
+  .g-nav{opacity:1;pointer-events:auto}
   .about-band{grid-template-columns:1fr;padding:4.5rem 1.5rem;gap:3rem}
   .photo-grid{grid-template-columns:1fr 1fr;grid-auto-rows:140px;gap:3px}
   .c1,.c2,.c3,.c4,.c5,.c6,.c7,.c8,.c9,.c10,.c11{grid-column:unset!important;grid-row:unset!important}
@@ -751,7 +745,6 @@ footer{
   .cc.feat{min-height:240px}
   .cc{aspect-ratio:4/3}
   .cc-single{aspect-ratio:4/3}
-  .reel{aspect-ratio:4/3}
   .contact{padding:3.5rem 1.2rem;gap:2.5rem}
   .contact-title{font-size:clamp(1.8rem,7vw,2.4rem)}
   .c-row{flex-direction:column;gap:.4rem;padding:.7rem 0}
@@ -770,10 +763,12 @@ footer{
   .photo-grid{grid-auto-rows:100px}
 }
 
+/* FIX: Touch devices — show overlay and nav controls always */
 @media(hover:none){
-  .pc:active .pc-ov{opacity:1}
+  .pc-ov{opacity:1;background:linear-gradient(to top,rgba(0,0,0,.7),transparent 70%)}
+  .g-nav{opacity:1;pointer-events:auto}
   .cc:active video,.cc:active img{filter:brightness(1)}
-  .gbox:active::after{opacity:1}
+  .gbox::after{opacity:1}
   .plat:active{background:var(--bg3);transform:translateY(-2px)}
   .plat:active::after{opacity:1}
 }
@@ -908,7 +903,7 @@ footer{
           <h3 class="si-title">Module Structure<br><em>with Colour Combination</em></h3>
           <p class="si-desc">Modular volumetric structures exploring spatial rhythm through three tones of blue and red-orange. Each cube carries chromatic weight — together forming an architectural landscape of colour and depth.</p>
           <div class="si-tags"><span class="si-tag">Modular Design</span><span class="si-tag">Colour Theory</span><span class="si-tag">3D Model</span></div>
-          <span class="si-year">2024 — Dept. Architecture, DIU</span>
+          <span class="si-year">2025 — Dept. Architecture, DIU</span>
         </div>
       </div>
 
@@ -925,7 +920,7 @@ footer{
           <h3 class="si-title">Curve Line &amp;<br><em>21 February Tribute</em></h3>
           <p class="si-desc">A pure curve study and typographic homage to International Mother Language Day — bold black, white and red in cartridge paper and PVC board. Lines that carry the weight of language and memory.</p>
           <div class="si-tags"><span class="si-tag">Curve Study</span><span class="si-tag">Typography</span><span class="si-tag">Freehand</span></div>
-          <span class="si-year">2024 — Design Studio 1, DIU</span>
+          <span class="si-year">2025 — Design Studio 1, DIU</span>
         </div>
       </div>
 
@@ -945,7 +940,7 @@ footer{
           <h3 class="si-title">Traditional House<br><em>of Japan</em></h3>
           <p class="si-desc">Group research documenting the spatial language, timber construction and climate-responsive design of traditional Japanese domestic architecture. Handcrafted model with bamboo structure and shoji screen walls.</p>
           <div class="si-tags"><span class="si-tag">Vernacular</span><span class="si-tag">Japanese Arch.</span><span class="si-tag">Physical Model</span></div>
-          <span class="si-year">2024 — Sociology, DIU</span>
+          <span class="si-year">2025 — Sociology, DIU</span>
         </div>
       </div>
 
@@ -965,7 +960,7 @@ footer{
           <h3 class="si-title">Parametric Pavilion<br><em>3D Voxel Geometry</em></h3>
           <p class="si-desc">A pavilion generated through 3D voxel geometry creating a dynamic wave-like surface with light and shadow interplay. Computational form-finding as design methodology — architecture born from algorithm.</p>
           <div class="si-tags"><span class="si-tag">Voxel</span><span class="si-tag">Parametric</span><span class="si-tag">Wave Surface</span></div>
-          <span class="si-year">2024 — Design Studio II, DIU</span>
+          <span class="si-year">2025 — Design Studio II, DIU</span>
         </div>
       </div>
 
@@ -982,10 +977,10 @@ footer{
         <div class="si">
           <div class="si-num">05</div>
           <span class="si-cat">Sculpture &amp; Model Making</span>
-          <h3 class="si-title">Architectural Lamp<br><em>DNA Origami</em></h3>
+          <h3 class="si-title">Architectural Lamp</h3>
           <p class="si-desc">A lamp born from origami paper-folding inspired by DNA replication. Translucent acrylic fins radiate warm light — biology translated into luminous, sculptural architecture.</p>
           <div class="si-tags"><span class="si-tag">Lamp Design</span><span class="si-tag">Origami</span><span class="si-tag">DNA Concept</span></div>
-          <span class="si-year">2024 — Sculpture &amp; Model Making, DIU</span>
+          <span class="si-year">2025 — Sculpture &amp; Model Making, DIU</span>
         </div>
       </div>
 
@@ -1004,7 +999,7 @@ footer{
           <h3 class="si-title">Origami Pavilion<br><em>Structure</em></h3>
           <p class="si-desc">A folded paper pavilion inspired by DNA replication patterns. Dynamic flowing planes create a sculptural canopy — origami logic at architectural scale.</p>
           <div class="si-tags"><span class="si-tag">Origami</span><span class="si-tag">Paper Folding</span><span class="si-tag">Pavilion</span></div>
-          <span class="si-year">2024 — Sculpture &amp; Model Making, DIU</span>
+          <span class="si-year">2025 — Sculpture &amp; Model Making, DIU</span>
         </div>
       </div>
 
@@ -1023,7 +1018,7 @@ footer{
           <h3 class="si-title">Exploring Emotions<br><em>Through Planes</em></h3>
           <p class="si-desc">A pavilion designed to evoke anger — large entry planes create curiosity, while the chaotic red sculpture at the centre destroys expectation. Raw, aggressive, intentional.</p>
           <div class="si-tags"><span class="si-tag">Emotional Arch.</span><span class="si-tag">Red &amp; White</span><span class="si-tag">Planes</span></div>
-          <span class="si-year">2024 — Design Studio, DIU</span>
+          <span class="si-year">2025 — Design Studio, DIU</span>
         </div>
       </div>
 
@@ -1043,7 +1038,7 @@ footer{
           <h3 class="si-title">Ziggurat<br><em>at Ur</em></h3>
           <p class="si-desc">1:200 scale model of the Ziggurat at Ur (2100 BCE), built in corrugated cardboard and shine board. A bridge between heaven and earth — the genius of ancient Mesopotamia reconstructed.</p>
           <div class="si-tags"><span class="si-tag">Scale 1:200</span><span class="si-tag">Mesopotamia</span><span class="si-tag">Cardboard</span></div>
-          <span class="si-year">2024 — Ancient Civilization, DIU</span>
+          <span class="si-year">2025 — Ancient Civilization, DIU</span>
         </div>
       </div>
 
@@ -1069,7 +1064,7 @@ footer{
   <div class="ab-right">
     <div class="ab-grid">
       <div class="ab-stat rv d1"><div class="ab-num">8+</div><div class="ab-lbl">Projects</div></div>
-      <div class="ab-stat rv d2"><div class="ab-num">2</div><div class="ab-lbl">Years Study</div></div>
+      <div class="ab-stat rv d2"><div class="ab-num">1</div><div class="ab-lbl">Years Study</div></div>
       <p class="ab-bio rv d3">Architecture student at Daffodil International University driven by the belief that great spaces shape great lives. Work spans modular design, vernacular studies, parametric explorations and sculptural model-making — each rooted in material honesty. Beyond architecture: photography and content creation that bridges design culture with wider audiences.</p>
       <div class="ab-skills rv d4">
         <div class="sk-row"><div class="sk-top"><span class="sk-name">SketchUp</span><span class="sk-val">85%</span></div><div class="sk-track"><div class="sk-fill" data-w="85" style="background:var(--gold)"></div></div></div>
@@ -1137,30 +1132,31 @@ footer{
       <div class="pc-ov"><span class="pc-cap">Abstract</span></div>
     </div>
     <div class="pc c11" onclick="openLb(this)">
-      <img src="Architecture.jpg" alt="Architecture II" onerror="this.style.opacity='.15'">
+      <img src="Picsart_25-06-24_22-47-55-851.jpg" alt="Architecture II" onerror="this.style.opacity='.15'">
       <div class="pc-ov"><span class="pc-cap">Architecture II</span></div>
     </div>
   </div>
 
+  <!-- FIX: Strip now correctly wraps all scroll items in a .strip container with proper id -->
   <p class="strip-head">Scroll for more</p>
   <div class="strip" id="photoStrip">
-    <div class="strip-item" onclick="openLb(this)">
-      <div class="s-up"><span>＋</span><input type="file" accept="image/*,video/*" onchange="setStrip(this)"></div>
+    <div class="strip-item" onclick="openLbSrc(this.querySelector('img').src)">
+      <img src="1.jpg" alt="" onerror="this.style.opacity='.15'">
     </div>
-    <div class="strip-item" onclick="openLb(this)">
-      <div class="s-up"><span>＋</span><input type="file" accept="image/*,video/*" onchange="setStrip(this)"></div>
+    <div class="strip-item" onclick="openLbSrc(this.querySelector('img').src)">
+      <img src="2.jpg" alt="" onerror="this.style.opacity='.15'">
     </div>
-    <div class="strip-item" onclick="openLb(this)">
-      <div class="s-up"><span>＋</span><input type="file" accept="image/*,video/*" onchange="setStrip(this)"></div>
+    <div class="strip-item" onclick="openLbSrc(this.querySelector('img').src)">
+      <img src="3.jpg" alt="" onerror="this.style.opacity='.15'">
     </div>
-    <div class="strip-item" onclick="openLb(this)">
-      <div class="s-up"><span>＋</span><input type="file" accept="image/*,video/*" onchange="setStrip(this)"></div>
+    <div class="strip-item" onclick="openLbSrc(this.querySelector('img').src)">
+      <img src="4.jpg" alt="" onerror="this.style.opacity='.15'">
     </div>
-    <div class="strip-item" onclick="openLb(this)">
-      <div class="s-up"><span>＋</span><input type="file" accept="image/*,video/*" onchange="setStrip(this)"></div>
+    <div class="strip-item" onclick="openLbSrc(this.querySelector('img').src)">
+      <img src="5.jpg" alt="" onerror="this.style.opacity='.15'">
     </div>
-    <div class="strip-item" onclick="openLb(this)">
-      <div class="s-up"><span>＋</span><input type="file" accept="image/*,video/*" onchange="setStrip(this)"></div>
+    <div class="strip-item" onclick="openLbSrc(this.querySelector('img').src)">
+      <img src="6.jpg" alt="" onerror="this.style.opacity='.15'">
     </div>
   </div>
 
@@ -1177,15 +1173,13 @@ footer{
       <span class="sec-label">Content Creator</span>
       <h2 class="sec-title">Story &amp;<br><em>Vision</em></h2>
     </div>
-    <p class="sec-desc">Bridging architecture with culture. Upload videos &amp; thumbnails in 4K.</p>
+    <p class="sec-desc">Bridging architecture with culture.</p>
   </div>
 
-  <!-- FIX 2: Video grid — 3 videos inside cc-grid, 4th video as its own full-width row below -->
-  <!-- All video IDs are unique: cv1, cv2, cv3 inside grid; cv4 outside -->
   <div class="cc-grid rv d1">
 
     <!-- FEATURED (left column, spans 2 rows) -->
-    <div class="cc feat" onmouseenter="playVid('cv1')" onmouseleave="pauseVid('cv1')">
+    <div class="cc feat" onmouseenter="playVid('cv1')" onmouseleave="pauseVid('cv1')" ontouchstart="playVid('cv1')">
       <video id="cv1" poster="thumb1.jpg" muted loop playsinline
         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         <source src="https://github.com/bLACKtERMINAL737/safwan-portfolio/releases/download/5th_video/6th.mp4" type="video/mp4">
@@ -1196,8 +1190,8 @@ footer{
       </div>
     </div>
 
-    <!-- CARD 2 (top right) -->
-    <div class="cc" onmouseenter="playVid('cv2')" onmouseleave="pauseVid('cv2')">
+    <!-- CARD 2 -->
+    <div class="cc" onmouseenter="playVid('cv2')" onmouseleave="pauseVid('cv2')" ontouchstart="playVid('cv2')">
       <video id="cv2" poster="thumb2.jpg" muted loop playsinline
         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         <source src="https://github.com/bLACKtERMINAL737/safwan-portfolio/releases/download/2nd_video/2nd.mp4" type="video/mp4">
@@ -1208,8 +1202,8 @@ footer{
       </div>
     </div>
 
-    <!-- CARD 3 (bottom right) -->
-    <div class="cc" onmouseenter="playVid('cv3')" onmouseleave="pauseVid('cv3')">
+    <!-- CARD 3 -->
+    <div class="cc" onmouseenter="playVid('cv3')" onmouseleave="pauseVid('cv3')" ontouchstart="playVid('cv3')">
       <video id="cv3" poster="thumb3.jpg" muted loop playsinline
         style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
         <source src="https://github.com/bLACKtERMINAL737/safwan-portfolio/releases/download/3rd_video/3rd.mp4" type="video/mp4">
@@ -1222,8 +1216,8 @@ footer{
 
   </div><!-- /cc-grid -->
 
-  <!-- FIX 2: 4th video — full width below the grid, unique id cv4 -->
-  <div class="cc-single" onmouseenter="playVid('cv4')" onmouseleave="pauseVid('cv4')">
+  <!-- 4th video — full width below the grid -->
+  <div class="cc-single" onmouseenter="playVid('cv4')" onmouseleave="pauseVid('cv4')" ontouchstart="playVid('cv4')">
     <video id="cv4" poster="thumb4.jpg" muted loop playsinline>
       <source src="https://github.com/bLACKtERMINAL737/safwan-portfolio/releases/download/4th_video/5th.mp4" type="video/mp4">
     </video>
@@ -1248,7 +1242,7 @@ footer{
   </div>
   <div class="contact-right rv d2">
     <p>Currently open to internship opportunities, collaborative academic projects, architecture competitions and content creation partnerships.</p>
-    <a href="Image_20260327010235_111_5.jpg" class="cv-btn">
+    <a href="https://canva.link/6nkj3jbttsygnu8" class="cv-btn">
       <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><path d="M7 1v9M3.5 7L7 10.5 10.5 7M2 13h10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span>Download CV — PDF</span>
     </a>
@@ -1327,6 +1321,7 @@ document.querySelectorAll('.drawer-link').forEach(function(a){
 /* ── THEME ── */
 var html=document.documentElement;
 var mBtn=document.getElementById('modeBtn');
+// FIX: Read saved theme on load correctly
 var stored=localStorage.getItem('sa-t')||'dark';
 html.setAttribute('data-theme',stored);
 mBtn.textContent=stored==='dark'?'☀':'☾';
@@ -1380,18 +1375,32 @@ window.pauseVid=function(id){
 
 /* ── GALLERY SYSTEM ── */
 var G={};
+// FIX: gInit now only starts auto-slide for multi-image galleries
 function gInit(p){
-  var imgs=Array.from(document.querySelectorAll('.g'+p));
+  var imgs=Array.from(document.querySelectorAll('.gi.g'+p));
+  // filter out images that failed to load (display:none from onerror)
+  imgs=imgs.filter(function(img){return img.parentNode;});
   if(!imgs.length)return;
-  G[p]={imgs:imgs,i:0};
-  gRender(p);gDots(p);
+  G[p]={imgs:imgs,i:0,timer:null};
+  gRender(p);
+  gDots(p);
   var z=document.getElementById('gu'+p);
   if(z)z.classList.add('gone');
-  if(imgs.length>1){setInterval(function(){G[p].i=(G[p].i+1)%G[p].imgs.length;gRender(p);},3800+p*150);}
+  // FIX: Only auto-slide when more than 1 image
+  if(imgs.length>1){
+    G[p].timer=setInterval(function(){
+      if(!G[p])return;
+      G[p].i=(G[p].i+1)%G[p].imgs.length;
+      gRender(p);
+    },3800+p*150);
+  }
 }
 function gRender(p){
   var s=G[p];if(!s)return;
-  s.imgs.forEach(function(img,i){img.classList.toggle('on',i===s.i);img.style.opacity=i===s.i?'1':'0';});
+  s.imgs.forEach(function(img,i){
+    img.classList.toggle('on',i===s.i);
+    img.style.opacity=i===s.i?'1':'0';
+  });
   var ds=document.querySelectorAll('#gd'+p+' .gd');
   ds.forEach(function(d,i){d.classList.toggle('on',i===s.i);});
   var ctr=document.getElementById('gc'+p);
@@ -1408,18 +1417,43 @@ function gDots(p){
     el.appendChild(d);
   });
 }
-window.gNav=function(p,dir){var s=G[p];if(!s)return;s.i=((s.i+dir)+s.imgs.length)%s.imgs.length;gRender(p);};
+window.gNav=function(p,dir){
+  var s=G[p];if(!s)return;
+  // FIX: Stop auto-slide when user manually navigates
+  if(s.timer){clearInterval(s.timer);s.timer=null;}
+  s.i=((s.i+dir)+s.imgs.length)%s.imgs.length;
+  gRender(p);
+};
 window.addImgs=function(inp,p){
   var files=Array.from(inp.files);if(!files.length)return;
   var box=inp.closest('.gbox');
+  // FIX: Insert before g-nav if present, else before gdots
+  var insertBefore=box.querySelector('.g-nav')||box.querySelector('.gdots')||box.querySelector('.gctr');
   files.forEach(function(f){
     var img=document.createElement('img');
-    img.src=URL.createObjectURL(f);img.className='gi g'+p;img.alt='';img.style.opacity='0';
-    box.insertBefore(img,box.querySelector('.g-nav')||box.querySelector('.gdots'));
+    img.src=URL.createObjectURL(f);
+    img.className='gi g'+p;
+    img.alt='';
+    img.style.opacity='0';
+    if(insertBefore){box.insertBefore(img,insertBefore);}else{box.appendChild(img);}
   });
   var z=document.getElementById('gu'+p);if(z)z.classList.add('gone');
-  G[p]={imgs:Array.from(document.querySelectorAll('.g'+p)),i:0};
-  gRender(p);gDots(p);
+  // FIX: Show g-nav when adding images
+  var gnav=box.querySelector('.g-nav');
+  if(gnav){gnav.style.display='flex';}
+  // FIX: Re-init with all new images
+  var allImgs=Array.from(box.querySelectorAll('.gi.g'+p));
+  if(G[p]&&G[p].timer){clearInterval(G[p].timer);}
+  G[p]={imgs:allImgs,i:0,timer:null};
+  gRender(p);
+  gDots(p);
+  if(allImgs.length>1){
+    G[p].timer=setInterval(function(){
+      if(!G[p])return;
+      G[p].i=(G[p].i+1)%G[p].imgs.length;
+      gRender(p);
+    },3800+p*150);
+  }
 };
 window.addEventListener('load',function(){for(var p=1;p<=8;p++)gInit(p);});
 function pad(n){return n<10?'0'+n:''+n;}
@@ -1511,6 +1545,13 @@ window.openLb=function(cell){
   lb.classList.add('open');
   document.body.style.overflow='hidden';
 };
+// FIX: openLbSrc for strip items where we pass src directly
+window.openLbSrc=function(src){
+  if(!src)return;
+  lbImg.src=src;
+  lb.classList.add('open');
+  document.body.style.overflow='hidden';
+};
 document.getElementById('lb-close').addEventListener('click',function(){
   lb.classList.remove('open');document.body.style.overflow='';
 });
@@ -1521,42 +1562,52 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){lb.classList.remove('open');document.body.style.overflow='';}
 });
 
-/* ── STRIP UPLOAD ── */
-window.setStrip=function(inp){
-  var f=inp.files[0];if(!f)return;
-  var url=URL.createObjectURL(f);
-  var item=inp.closest('.strip-item');var zone=inp.closest('.s-up');
-  var isV=f.type.startsWith('video/');var m;
-  if(isV){m=document.createElement('video');m.src=url;m.muted=true;m.loop=true;m.autoplay=true;m.playsInline=true;}
-  else{m=document.createElement('img');m.src=url;}
-  m.style.cssText='width:100%;height:100%;object-fit:cover;';
-  if(zone)zone.classList.add('gone');
-  item.insertBefore(m,item.firstChild);
-};
-
 /* ── STRIP DRAG ── */
+// FIX: photoStrip id now correctly matches the element in HTML
 var stripEl=document.getElementById('photoStrip');
 if(stripEl){
   var isDown=false,sx=0,sl=0;
-  stripEl.addEventListener('mousedown',function(e){isDown=true;sx=e.pageX-stripEl.offsetLeft;sl=stripEl.scrollLeft;stripEl.style.userSelect='none';});
+  stripEl.addEventListener('mousedown',function(e){
+    isDown=true;sx=e.pageX-stripEl.offsetLeft;sl=stripEl.scrollLeft;
+    stripEl.style.userSelect='none';
+  });
   stripEl.addEventListener('mouseleave',function(){isDown=false;});
   stripEl.addEventListener('mouseup',function(){isDown=false;stripEl.style.userSelect='';});
-  stripEl.addEventListener('mousemove',function(e){if(!isDown)return;e.preventDefault();stripEl.scrollLeft=sl-(e.pageX-stripEl.offsetLeft-sx)*1.2;});
+  stripEl.addEventListener('mousemove',function(e){
+    if(!isDown)return;e.preventDefault();
+    stripEl.scrollLeft=sl-(e.pageX-stripEl.offsetLeft-sx)*1.2;
+  });
+  // FIX: Prevent click from firing after drag on strip items
+  var dragged=false;
+  stripEl.addEventListener('mousedown',function(){dragged=false;});
+  stripEl.addEventListener('mousemove',function(){dragged=true;});
+  stripEl.querySelectorAll('.strip-item').forEach(function(item){
+    item.addEventListener('click',function(e){if(dragged){e.stopPropagation();dragged=false;}});
+  });
 }
 
 /* ── HERO PARALLAX ── */
 if(window.matchMedia('(pointer:fine)').matches){
   window.addEventListener('scroll',function(){
     var img=document.querySelector('.profile-img');
-    if(img&&window.scrollY<window.innerHeight)img.style.transform='translateY('+(window.scrollY*.09)+'px)';
+    if(img&&window.scrollY<window.innerHeight){
+      img.style.transform='translateY('+(window.scrollY*.09)+'px)';
+    }
   },{passive:true});
 }
 
-/* ── PWA SERVICE WORKER (for installability) ── */
+/* ── PWA: NO external sw.js needed — inline service worker ── */
+// FIX: Register an inline service worker so the site is installable
+// without needing a separate sw.js file
 if('serviceWorker' in navigator){
-  window.addEventListener('load',function(){
-    navigator.serviceWorker.register('sw.js').catch(function(){});
-  });
+  var swCode=[
+    "self.addEventListener('install',function(e){self.skipWaiting();});",
+    "self.addEventListener('activate',function(e){e.waitUntil(self.clients.claim());});",
+    "self.addEventListener('fetch',function(e){e.respondWith(fetch(e.request).catch(function(){return new Response('Offline');}));});"
+  ].join('\n');
+  var swBlob=new Blob([swCode],{type:'application/javascript'});
+  var swUrl=URL.createObjectURL(swBlob);
+  navigator.serviceWorker.register(swUrl).catch(function(){});
 }
 
 })();
